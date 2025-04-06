@@ -26,6 +26,65 @@
 
     <!-- Optional Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="js/filter.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <script>
+        let autocomplete;
+
+        function initAutocomplete() {
+            const input = document.getElementById("pickupLocation");
+            if (!input) return;
+            autocomplete = new google.maps.places.Autocomplete(input, {
+                types: ['geocode'], // or 'address'
+            });
+        }
+
+        // Re-initialize when modal is shown
+        document.addEventListener("DOMContentLoaded", () => {
+            const modal = document.getElementById("carModal");
+            if (modal) {
+                modal.addEventListener("shown.bs.modal", () => {
+                    initAutocomplete();
+                });
+            }
+        });
+    </script>
+    <script>
+        const fuelData = {
+            'Jeep': '12L/100km',
+            'Mercedes G-class': '11L/100km',
+            'Mercedes AMG slg': '9L/100km',
+            'BMW M3': '10L/100km',
+            'Mercedes A-clas Coupe': '8.5L/100km',
+            'Blue Alpine Coupe': '7.5L/100km',
+            'Audi a7': '9L/100km'
+        };
+
+        // Open modal popup
+        function openCarModal(name, kilometers, fuel, imageUrl) {
+            const modalElement = document.getElementById('carModal');
+            if (!modalElement) {
+                console.error("Modal element not found.");
+                return;
+            }
+
+            const modal = new bootstrap.Modal(modalElement);
+            modalElement.querySelector('.modal-title').textContent = name;
+            modalElement.querySelector('#carName').textContent = name;
+            modalElement.querySelector('#carKm').textContent = kilometers;
+            modalElement.querySelector('#carFuel').textContent = fuel;
+            const carImage = modalElement.querySelector('#carImage');
+            carImage.src = imageUrl;
+            carImage.alt = name;
+
+            modal.show();
+        }
+
+    </script>
+
+
+
+
 
 
 
@@ -34,71 +93,73 @@
 <body>
 
     <header>
-        <!-- Header Start -->
-        <nav id="navigation" style="background-color: #1c1c1c; padding: 15px 0;">
-            <div class="header-area">
-                <div class="main-header">
-                    <div class="header-bottom header-sticky">
-                        <div class="container-fluid">
-                            <div class="row align-items-center">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1c1c1c; padding: 10px 0;">
+            <div class="container-fluid">
 
-                                <!-- Logo -->
-                                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
-                                    <div class="logo"
-                                        style="background-color: #d3d3d3; padding: 8px; border-radius: 6px; display: inline-block;">
-                                        <a href="#" onclick="loadPage('home')">
-                                            <img src="assets/img/logo/logo.png" alt="Logo"
-                                                style="max-height: 60px; display: block;">
-                                        </a>
-                                    </div>
-                                </div>
+                <!-- Logo -->
+                <a class="navbar-brand d-flex align-items-center" href="#" onclick="loadPage('home')">
+                    <div style="background-color: #d3d3d3; padding: 8px; border-radius: 6px;">
+                        <img src="assets/img/logo/logo.png" alt="Logo" style="max-height: 60px;">
+                    </div>
+                </a>
 
-                                <!-- Main Links -->
-                                <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
-                                    <div class="main-menu f-right d-none d-lg-block">
-                                        <ul id="navigation"
-                                            style="list-style: none; display: flex; gap: 30px; margin: 0; padding: 0;">
-                                            <li>
-                                                <a href="#" onclick="loadPage('home')"
-                                                    style="color: white; text-decoration: none; font-weight: 500; transition: 0.3s ease;">Home</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onclick="loadPage('Catagori')"
-                                                    style="color: white; text-decoration: none; font-weight: 500; transition: 0.3s ease;">Category</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                <!-- Hamburger toggle for mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                                <!-- Auth Links -->
-                                <div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fix-card">
-                                    <ul class="header-right f-right d-none d-lg-block d-flex justify-content-end"
-                                        style="list-style: none; gap: 25px; margin: 0; padding: 0;">
-                                        <li>
-                                            <a href="#" onclick="loadPage('login')"
-                                                style="color: white; text-decoration: none; font-weight: 500; transition: 0.3s ease;">Log
-                                                in</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onclick="loadPage('signup')"
-                                                style="color: white; text-decoration: none; font-weight: 500; transition: 0.3s ease;">Sign
-                                                up</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                <!-- Navbar content -->
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <!-- Desktop view: flex row -->
+                    <div class="d-none d-lg-flex flex-grow-1 justify-content-between align-items-center w-100">
 
-                            </div>
-                        </div>
+                        <!-- Center: Main Nav -->
+                        <ul class="navbar-nav flex-row gap-4 mx-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#" onclick="loadPage('home')">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#" onclick="loadPage('Catagori')">Category</a>
+                            </li>
+                        </ul>
+
+                        <!-- Right: Auth -->
+                        <ul class="navbar-nav flex-row gap-3">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#" onclick="loadPage('login')">Log in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#" onclick="loadPage('signup')">Sign up</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Mobile view: stacked and left-aligned -->
+                    <div class="d-lg-none mt-3">
+                        <ul class="navbar-nav text-start">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#" onclick="loadPage('home')">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#" onclick="loadPage('Catagori')">Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#" onclick="loadPage('login')">Log in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#" onclick="loadPage('signup')">Sign up</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </nav>
-
-        <!-- Mobile Menu -->
-        <div class="col-12">
-            <div class="mobile_menu d-block d-lg-none"></div>
-        </div>
     </header>
+
+
+
+
 
 
     <div id="content"></div>
@@ -235,67 +296,11 @@
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
     <!-- MODAL-->
-    <script>
-        function openCarModal(name, kilometers, fuel, imageUrl) {
-            const modal = new bootstrap.Modal(document.getElementById('carModal'));
-            document.getElementById('carModalLabel').textContent = name;
-            document.getElementById('carName').textContent = name;
-            document.getElementById('carKm').textContent = kilometers;
-            document.getElementById('carFuel').textContent = fuel;
-            document.getElementById('carImage').src = imageUrl;
-            document.getElementById('carReview').value = '';
-            modal.show();
-        }
-    </script>
+
 
     <!-- carousel recommended-->
 
     <script>$('.carousel').carousel()</script>
-    <script>
-        const fuelData = {
-            'Jeep': '12L/100km',
-            'Mercedes G-class': '11L/100km',
-            'Mercedes AMG slg': '9L/100km',
-            'BMW M3': '10L/100km',
-            'Mercedes A-clas Coupe': '8.5L/100km',
-            'Blue Alpine Coupe': '7.5L/100km',
-            'Audi a7': '9L/100km'
-        };
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const filterSelect = document.getElementById("car-category"); // FIXED ID
-            const cards = document.querySelectorAll("#car-cards .property-item");
-
-            if (!filterSelect) {
-                console.error("Filter dropdown not found.");
-                return;
-            }
-
-            filterSelect.addEventListener("change", function () {
-                const selected = this.value.toLowerCase();
-
-                cards.forEach(card => {
-                    const category = card.dataset.category.toLowerCase();
-
-                    if (selected === "all" || category === selected) {
-                        card.classList.remove("d-none");
-                    } else {
-                        card.classList.add("d-none");
-                    }
-                });
-            });
-        });
-
-        // Open modal popup
-        function openPopup(carName, price, imageUrl) {
-            const modal = new bootstrap.Modal(document.getElementById('carModal'));
-            document.getElementById('carModalLabel').innerText = carName;
-            document.getElementById('carPrice').innerText = `Price: ${price}`;
-            document.getElementById('carDescription').innerText = `Fuel Consumption: ${fuelData[carName] || 'N/A'}`;
-            document.getElementById('carImage').src = imageUrl;
-            modal.show();
-        }
-    </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

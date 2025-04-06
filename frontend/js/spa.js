@@ -1,20 +1,18 @@
 function loadPage(page) {
-    fetch(`../frontend/views/${page}.html`)
+    fetch(`views/${page}.html`)
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`Page not found: ${page}`);
-            }
+            if (!response.ok) throw new Error(`Page not found: ${page}`);
             return response.text();
         })
         .then(html => {
             document.getElementById("content").innerHTML = html;
 
-            // Manage body classes based on page
-            document.body.className = ""; // Reset previous classes
-            if (page === "login" || page === "signup") {
-                document.body.classList.add("auth-page");
-            } else {
-                document.body.classList.add("main-page");
+            document.body.className = (page === "login" || page === "signup") ? "auth-page" : "main-page";
+
+            // Call init functions if category page is loaded
+            if (page.toLowerCase() === "catagori") {
+                if (typeof initCategoryFilter === "function") initCategoryFilter();
+                if (typeof openPopup === "function") console.log("Popup function ready.");
             }
         })
         .catch(error => {
@@ -22,7 +20,6 @@ function loadPage(page) {
             document.getElementById("content").innerHTML = "<h2>Page not found.</h2>";
         });
 }
-
 // Load correct page on initial load
 window.onload = function () {
     let page = window.location.hash.substring(1);

@@ -154,7 +154,7 @@
             <div class="row" id="car-cards">
                 <div class="col-md-4 property-item" data-category="suv">
                     <div class="card"
-                        onclick="openPopup('Jeep', '$50/day', 'assets/img/categori/pexels-aaronmcurtis-119435.jpg')">
+                        onclick="openCarModal('Jeep', '$50/day','10L/100km', 'assets/img/categori/pexels-aaronmcurtis-119435.jpg')">
                         <img src="assets/img/categori/pexels-aaronmcurtis-119435.jpg" class="card-img-top"
                             alt="SUV Car">
                         <div class="card-body">
@@ -165,7 +165,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="suv">
                     <div class="card"
-                        onclick="openPopup('Mercedes G-class', '$40/day', 'assets/img/categori/pexels-lloyd-freeman-599375-1429775.jpg')">
+                        onclick="openCarModal('Mercedes G-class', '$40/day','12L/100km', 'assets/img/categori/pexels-lloyd-freeman-599375-1429775.jpg')">
                         <img src="assets/img/categori/pexels-lloyd-freeman-599375-1429775.jpg" class="card-img-top"
                             alt="SUV Car">
                         <div class="card-body">
@@ -176,7 +176,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="coupe">
                     <div class="card"
-                        onclick="openPopup('Mercedes AMG slg', '$30/day', 'assets/img/categori/pexels-mikebirdy-112460.jpg')">
+                        onclick="openCarModal('Mercedes AMG slg', '$30/day','14L/100km', 'assets/img/categori/pexels-mikebirdy-112460.jpg')">
                         <img src="assets/img/categori/pexels-mikebirdy-112460.jpg" class="card-img-top" alt="Coupe Car">
                         <div class="card-body">
                             <h5 class="card-title">Mercedes AMG slg</h5>
@@ -186,7 +186,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="sedan">
                     <div class="card"
-                        onclick="openPopup('BMW M3', '$60/day', 'assets/img/categori/pexels-mikebirdy-170811.jpg')">
+                        onclick="openCarModal('BMW M3', '$60/day','9L/100km', 'assets/img/categori/pexels-mikebirdy-170811.jpg')">
                         <img src="assets/img/categori/pexels-mikebirdy-170811.jpg" class="card-img-top" alt="Sedan Car">
                         <div class="card-body">
                             <h5 class="card-title">BMW M3</h5>
@@ -196,7 +196,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="coupe">
                     <div class="card"
-                        onclick="openPopup('Mercedes A-clas Coupe', '$60/day', 'assets/img/categori/pexels-mikebirdy-810357.jpg')">
+                        onclick="openCarModal('Mercedes A-clas Coupe', '$60/day','7L/100km', 'assets/img/categori/pexels-mikebirdy-810357.jpg')">
                         <img src="assets/img/categori/pexels-mikebirdy-810357.jpg" class="card-img-top" alt="Coupe Car">
                         <div class="card-body">
                             <h5 class="card-title">Mercedes A-clas Coupe</h5>
@@ -206,7 +206,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="suv">
                     <div class="card"
-                        onclick="openPopup('Jeep', '$60/day', 'assets/img/categori/pexels-zsolt-joo-483255-2882234.jpg')">
+                        onclick="openCarModal('Jeep', '$60/day','11L/100km', 'assets/img/categori/pexels-zsolt-joo-483255-2882234.jpg')">
                         <img src="assets/img/categori/pexels-zsolt-joo-483255-2882234.jpg" class="card-img-top"
                             alt="SUV Car">
                         <div class="card-body">
@@ -217,7 +217,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="coupe">
                     <div class="card"
-                        onclick="openPopup('Blue Alpine Coupe', '$60/day', 'assets/img/categori/pexels-alexgtacar-745150-1592384.jpg')">
+                        onclick="openCarModal('Blue Alpine Coupe', '$60/day','9L/100km', 'assets/img/categori/pexels-alexgtacar-745150-1592384.jpg')">
                         <img src="assets/img/categori/pexels-alexgtacar-745150-1592384.jpg" class="card-img-top"
                             alt="Coupe Car">
                         <div class="card-body">
@@ -228,7 +228,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="sedan">
                     <div class="card"
-                        onclick="openPopup('Audi a7', '$60/day', 'assets/img/categori/pexels-mladenscekic-17217573.jpg')">
+                        onclick="openCarModal('Audi a7', '$60/day', '8L/100km','assets/img/categori/pexels-mladenscekic-17217573.jpg')">
                         <img src="assets/img/categori/pexels-mladenscekic-17217573.jpg" class="card-img-top"
                             alt="Sedan Car">
                         <div class="card-body">
@@ -240,7 +240,8 @@
             </div>
         </div>
 
-        <!-- Popup Modal -->
+        <!-- MODAL -->
+        <!-- MODAL -->
         <div class="modal fade" id="carModal" tabindex="-1" aria-labelledby="carModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content bg-dark text-white">
@@ -249,33 +250,47 @@
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
-
                     <div class="modal-body text-white">
                         <div class="row">
-                            <div class="col-md-6 mb-3 text-center">
+                            <div class="col-md-6 mb-3">
                                 <img id="carImage" src="" class="img-fluid rounded" alt="Car Image">
-                                <p class="mt-3" id="carDescription"></p>
-                                <p id="carPrice"></p>
                             </div>
-
                             <div class="col-md-6">
-                                <!-- Rental Date Picker -->
-                                <div class="mb-3">
+                                <p><strong class="text-white">Car:</strong> <span id="carName"
+                                        class="text-white"></span></p>
+                                <p><strong class="text-white">Kilometers:</strong> <span id="carKm"
+                                        class="text-white"></span>
+                                </p>
+                                <p><strong class="text-white">Fuel Consumption:</strong> <span id="carFuel"
+                                        class="text-white"></span></p>
+
+                                <!-- Date Picker -->
+                                <div class="form-group mt-3">
                                     <label for="rentalDate" class="form-label text-white">Pick a rental date:</label>
                                     <input type="date" id="rentalDate"
                                         class="form-control bg-dark text-white border-light">
                                 </div>
 
-                                <!-- Phone Number Field -->
-                                <div class="mb-3">
+                                <!-- Phone Number -->
+                                <div class="form-group mt-3">
                                     <label for="phoneNumber" class="form-label text-white">Phone Number:</label>
                                     <input type="tel" id="phoneNumber"
                                         class="form-control bg-dark text-white border-light"
                                         placeholder="e.g. +1 234 567 890">
                                 </div>
 
-                                <!-- Review Textarea -->
-                                <div class="mb-3">
+                                <!-- Booking Place -->
+                                <!-- Pickup Address -->
+                                <div class="form-group mt-3">
+                                    <label for="pickupLocation" class="form-label text-white">Enter Pickup
+                                        Address:</label>
+                                    <input type="text" id="pickupLocation"
+                                        class="form-control bg-dark text-white border-light"
+                                        placeholder="e.g. 123 Main St, Auto City">
+                                </div>
+
+                                <!-- Review -->
+                                <div class="form-group mt-4">
                                     <label for="carReview" class="form-label text-white">Leave a review:</label>
                                     <textarea id="carReview" class="form-control bg-dark text-white border-light"
                                         rows="3" placeholder="Write your thoughts"></textarea>
@@ -284,25 +299,14 @@
                         </div>
                     </div>
 
-                    <!-- Modal Footer -->
+                    <!-- Footer -->
                     <div class="modal-footer border-top-0">
-                        <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal"
-                            style="background-color: #555; border: none;"
-                            onmouseover="this.style.backgroundColor='#fff'; this.style.color='#000';"
-                            onmouseout="this.style.backgroundColor='#555'; this.style.color='#fff';">
-                            Close
-                        </button>
-                        <button type="button" class="btn btn-secondary text-white"
-                            style="background-color: #555; border: none;"
-                            onmouseover="this.style.backgroundColor='#fff'; this.style.color='#000';"
-                            onmouseout="this.style.backgroundColor='#555'; this.style.color='#fff';">
-                            Rent Now
-                        </button>
+                        <button type="button" class="btn btn-dark text-white" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-dark text-white">Rent Now</button>
                     </div>
                 </div>
             </div>
         </div>
-
 
 
 
@@ -441,6 +445,7 @@
     <!-- JS here -->
 
     <!-- filter-->
+
 
 
 </body>
