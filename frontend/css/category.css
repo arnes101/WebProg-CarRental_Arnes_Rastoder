@@ -1,115 +1,37 @@
-/* ===== General Resets ===== */
+/* ===== General Reset ===== */
 body {
-    background-color: #706f6f;
-    color: #1a1a1a;
+    background-color: #1c1c1c;
+    color: #f0f0f0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-}
-
-/* ===== Preloader Fix (optional) ===== */
-#preloader-active {
-    background-color: #dbd7d7;
-}
-
-/* ===== Clickable elements ===== */
-.clickable {
-    cursor: pointer;
-}
-
-/* ===== Modal Z-Index Fix ===== */
-.modal {
-    z-index: 99999;
-    margin-top: 200px;
-}
-
-.modal-content {
-    background-color: #f1f1f1;
-    color: #222;
-}
-
-.modal-header,
-.modal-footer {
-    border-color: #ccc;
-}
-
-/* ===== Card Styling ===== */
-.property-item {
-    margin-bottom: 20px;
-}
-
-.card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.card-title {
-    color: #111;
-    font-weight: bold;
-}
-
-.card-text {
-    color: #444;
-}
-
-.card-img-top {
-    transition: transform 0.4s ease;
-}
-
-.card:hover .card-img-top {
-    transform: scale(1.03);
-}
-
-/* ===== Form & Dropdowns ===== */
-.form-box input[type="text"] {
-    background-color: #444;
-    border: none;
-    color: #fff;
-}
-
-.search-icon i {
-    color: #fff;
-}
-
-.form-select {
-    background-color: #eeeeee;
-    color: #222;
-    border: 1px solid #ccc;
 }
 
 /* ===== Header / Navbar ===== */
 .header-area,
 .header-top,
 .header-bottom {
-    background-color: #2e2e2e;
-    color: #f2f2f2;
+    background-color: #111;
+    color: #eee;
 }
 
 .header-info-left ul li,
 .header-info-right ul li a,
 .main-menu nav ul li a,
 .main-menu nav ul li .submenu li a {
-    color: #e0e0e0 !important;
+    color: #ccc !important;
 }
 
 .main-menu nav ul li a:hover,
 .main-menu nav ul li .submenu li a:hover {
-    color: #ffffff !important;
+    color: #fff !important;
 }
 
 /* ===== Hero Section ===== */
 .slider-area,
 .single-slider,
 .slider-area .single-slider {
-    background-color: #444;
+    background-color: #222;
     position: relative;
 }
 
@@ -120,64 +42,98 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
-.hero-cap {
-    position: relative;
-    z-index: 2;
+/* ===== Card Styling ===== */
+.card {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.hero-cap h2 {
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
     color: #ffffff;
+    font-weight: bold;
 }
 
-/* ===== Headings & Text in Sections ===== */
-.section-padding30 h2,
-h3,
-h4,
-h5,
-h6 {
-    color: #1a1a1a;
+.card-text {
+    color: #cccccc;
 }
 
-p,
-span,
-li,
-label {
-    color: #2b2b2b;
+.card-img-top {
+    transition: transform 0.4s ease;
 }
 
-/* ===== Section Background Overrides ===== */
-.container,
-.section-padding30,
-.slider-area,
-.main,
-#car-cards,
-footer,
-.gallery-area,
-.footer-area {
-    background-color: #dbd7d7;
+.card:hover .card-img-top {
+    transform: scale(1.03);
 }
 
-/* ===== Footer Styling ===== */
-.footer-area {
-    background-color: #222 !important;
-    color: #bbb;
+/* ===== Buttons ===== */
+.btn-primary {
+    background-color: #0066cc;
+    border: none;
+    color: white;
 }
 
-.footer-tittle h4 {
+.btn-primary:hover {
+    background-color: #005bb5;
+    color: white;
+}
+
+.btn-grey {
+    background-color: #333;
+    color: #eee;
+    border: 1px solid #555;
+}
+
+.btn-grey:hover {
+    background-color: #444;
+    border-color: #666;
+    color: white;
+}
+
+.btn-grey-outline {
+    background-color: transparent;
+    color: #ccc;
+    border: 1px solid #666;
+}
+
+.btn-grey-outline:hover {
+    background-color: #333;
+    color: white;
+    border-color: #777;
+}
+
+/* ===== Forms ===== */
+.form-select,
+input,
+textarea {
+    background-color: #2e2e2e;
     color: #f0f0f0;
+    border: 1px solid #555;
 }
 
-.footer-pera p,
-.footer-copy-right p {
+/* ===== Footer ===== */
+.footer-area {
+    background-color: #111;
     color: #ccc;
 }
 
+.footer-tittle h4 {
+    color: #fff;
+}
+
 .footer-social a {
-    color: #aaa;
+    color: #888;
     transition: color 0.3s ease;
 }
 
@@ -185,104 +141,106 @@ footer,
     color: #fff;
 }
 
-/* ===== Buttons ===== */
-.btn-primary {
-    background-color: #333;
-    border: none;
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: #555;
-    color: white;
-}
-
 /* ===== Gallery ===== */
-.gallery-items {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+.gallery-items img {
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85);
+    transition: 0.3s ease;
 }
-
-
 
 .gallery-items img:hover {
-    filter: brightness(1.05);
+    filter: brightness(1);
 }
 
-.gallery-wrapper,
-.gallery-area {
-    margin: 0;
-    padding: 0;
+/* ===== Modal ===== */
+.modal-content {
+    background-color: #1c1c1c;
+    color: #eee;
 }
 
-.gallery-items img {
-    border-radius: 0;
-    /* no rounding */
-    height: 100%;
-    /* keep tall height */
-    object-fit: cover;
-    display: block;
-}
-
-.gallery-wrapper,
-.gallery-area {
-    margin: 0;
-    padding: 0;
-}
-
-.gallery-items img {
-    border-radius: 0;
-    /* no rounding */
-    height: 100%;
-    /* keep tall height */
-    object-fit: cover;
-    display: block;
-}
-
-.property-item {
-    transition: all 0.3s ease;
-}
-
-.btn-secondary {
-    background-color: #555;
-    border-color: #555;
-}
-
-.btn-secondary:hover {
-    background-color: #666;
-    border-color: #666;
-}
-
-.btn-grey {
-    background-color: #4b4b4b;
-    color: #e0e0e0;
-    border: 1px solid #6a6a6a;
-    border-radius: 50px;
-    padding: 6px 20px;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
-
-.btn-grey:hover {
-    background-color: #5c5c5c;
+.modal-footer .btn {
+    background-color: #444;
     color: #fff;
-    border-color: #7a7a7a;
+    border: none;
 }
 
-.btn-grey-outline {
-    background-color: transparent;
-    color: #ccc;
-    border: 1px solid #666;
-    border-radius: 50px;
-    padding: 6px 20px;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
+.modal-footer .btn:hover {
+    background-color: #fff;
+    color: #000;
 }
 
-.btn-grey-outline:hover {
-    background-color: #4b4b4b;
+/* ===== Recommended Section ===== */
+.recommended-area {
+    background-color: #2b2b2b;
+}
+
+.recommended-area h2,
+.recommended-area p {
+    color: #f0f0f0;
+}
+
+.arrow-text {
+    color: #aaa;
+}
+
+.custom-arrow-btn:hover .arrow-text {
     color: #fff;
-    border-color: #777;
+}
+
+/* ===== Hero Text Overlay ===== */
+.slider-area .text-overlay {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* ===== Section Title ===== */
+.section-tittle h2,
+.section-tittle p {
+    color: #f0f0f0;
+}
+
+/* Style Google autocomplete dropdown in dark mode */
+.pac-container {
+    background-color: #1f1f1f !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #444;
+    z-index: 9999 !important;
+}
+
+/* Suggestion text color */
+.pac-item {
+    background-color: #2a2a2a !important;
+    color: #f1f1f1 !important;
+}
+
+/* Highlighted suggestion */
+.pac-item-selected {
+    background-color: #333 !important;
+}
+
+/* Description inside autocomplete */
+.pac-item .pac-item-query {
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+/* Remove weird white borders */
+.pac-icon {
+    display: none !important;
+}
+
+#pickupLocation {
+    background-color: #1f1f1f;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+.modal-content.bg-dark input::placeholder,
+.modal-content.bg-dark textarea::placeholder {
+    color: #ccc !important;
+    opacity: 1 !important;
 }
