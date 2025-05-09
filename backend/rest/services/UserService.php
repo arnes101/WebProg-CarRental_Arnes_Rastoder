@@ -15,7 +15,7 @@ class UserService {
     }
 
     public function getUserById($id) {
-        return $this->userDao->getById($id);
+        return $this->userDao->get($id);
     }
 
     public function createUser($data) {

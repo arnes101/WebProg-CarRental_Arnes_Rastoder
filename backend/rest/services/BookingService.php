@@ -13,7 +13,7 @@ class BookingService {
     }
 
     public function getBookingById($id) {
-        return $this->bookingDao->getById($id);
+        return $this->bookingDao->get($id);
     }
 
     public function createBooking($data) {

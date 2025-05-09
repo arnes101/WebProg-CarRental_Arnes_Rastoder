@@ -11,11 +11,12 @@ class CarDAO {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById($id) {
-        $stmt = $this->pdo->prepare("SELECT * FROM cars WHERE id = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+   public function get($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM cars WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 
     public function create($data) {
         $stmt = $this->pdo->prepare("INSERT INTO cars (name, price_per_day, kilometers, fuel_consumption, category_id, image_url) VALUES (?, ?, ?, ?, ?, ?)");

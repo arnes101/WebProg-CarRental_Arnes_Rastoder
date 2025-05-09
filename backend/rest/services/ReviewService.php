@@ -13,7 +13,7 @@ class ReviewService {
     }
 
     public function getReviewById($id) {
-        return $this->reviewDao->getById($id);
+        return $this->reviewDao->get($id); 
     }
 
     public function createReview($data) {

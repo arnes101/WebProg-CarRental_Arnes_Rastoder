@@ -14,7 +14,7 @@ class CategoryService {
     }
 
     public function getCategoryById($id) {
-        return $this->categoryDao->getById($id);
+        return $this->categoryDao->get($id);
     }
 
     public function createCategory($data) {

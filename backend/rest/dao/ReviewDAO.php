@@ -1,7 +1,10 @@
 <?php
 class ReviewDAO {
     private $pdo;
-    public function __construct($pdo) { $this->pdo = $pdo; }
+
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+    }
 
     public function getAll() {
         $stmt = $this->pdo->query("SELECT * FROM reviews");
@@ -15,14 +18,23 @@ class ReviewDAO {
     }
 
     public function create($review) {
-        $stmt = $this->pdo->prepare("INSERT INTO reviews (user_id, car_id, content) VALUES (?, ?, ?)");
-        $stmt->execute([$review['user_id'], $review['car_id'], $review['content']]);
+        $stmt = $this->pdo->prepare("INSERT INTO reviews (user_id, car_id, content, created_at) VALUES (?, ?, ?, ?)");
+        $stmt->execute([
+            $review['user_id'], 
+            $review['car_id'], 
+            $review['content'],
+            $review['created_at'] ?? date('Y-m-d H:i:s') 
+        ]);
         return $this->pdo->lastInsertId();
     }
 
     public function update($id, $review) {
-        $stmt = $this->pdo->prepare("UPDATE reviews SET content = ? WHERE id = ?");
-        $stmt->execute([$review['content'], $id]);
+        $stmt = $this->pdo->prepare("UPDATE reviews SET content = ?, created_at = ? WHERE id = ?");
+        $stmt->execute([
+            $review['content'],
+            $review['created_at'] ?? date('Y-m-d H:i:s'), 
+            $id
+        ]);
         return $stmt->rowCount();
     }
 
