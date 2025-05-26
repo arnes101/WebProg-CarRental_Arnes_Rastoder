@@ -328,3 +328,19 @@ body {
     background-color: white;
     color: #000;
 }
+
+#mainNavbar {
+    transition: top 0.4s;
+}
+
+.btn-grey {
+    background-color: #333;
+    color: #eee;
+    border: 1px solid #555;
+}
+
+.btn-grey:hover {
+    background-color: #444;
+    border-color: #666;
+    color: white;
+}

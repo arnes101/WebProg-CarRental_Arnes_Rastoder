@@ -13,6 +13,8 @@ require_once __DIR__ . '/../services/BookingService.php';
  * )
  */
 Flight::route('GET /bookings', function () {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $service = new BookingService();
     Flight::json($service->getAllBookings());
 });
@@ -32,6 +34,8 @@ Flight::route('GET /bookings', function () {
  * )
  */
 Flight::route('GET /bookings/@id', function ($id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $service = new BookingService();
     Flight::json($service->getBookingById($id));
 });
@@ -59,6 +63,8 @@ Flight::route('GET /bookings/@id', function ($id) {
  * )
  */
 Flight::route('POST /bookings', function () {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $data = Flight::request()->data->getData();
     $service = new BookingService();
     Flight::json($service->createBooking($data));
@@ -89,6 +95,8 @@ Flight::route('POST /bookings', function () {
  * )
  */
 Flight::route('PUT /bookings/@id', function ($id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $data = Flight::request()->data->getData();
     $service = new BookingService();
     Flight::json($service->updateBooking($id, $data));
@@ -109,6 +117,8 @@ Flight::route('PUT /bookings/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /bookings/@id', function ($id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $service = new BookingService();
     Flight::json($service->deleteBooking($id));
 });

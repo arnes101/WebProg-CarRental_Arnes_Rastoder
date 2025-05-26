@@ -1,39 +1,103 @@
 function loadPage(page) {
-    fetch(`views/${page}.html`)
-        .then(response => {
-            if (!response.ok) throw new Error(`Page not found: ${page}`);
-            return response.text();
-        })
-        .then(html => {
-            document.getElementById("content").innerHTML = html;
-
-            document.body.className = (page === "login" || page === "signup") ? "auth-page" : "main-page";
-
-            // Call init functions if category page is loaded
-            if (page.toLowerCase() === "catagori") {
-                if (typeof initCategoryFilter === "function") initCategoryFilter();
-                if (typeof openPopup === "function") console.log("Popup function ready.");
-            }
-        })
-        .catch(error => {
-            console.error("Error loading page:", error);
-            document.getElementById("content").innerHTML = "<h2>Page not found.</h2>";
-        });
+    $("#content").load(`views/${page}.html`, function () {
+        if (page === "login") initLogin();
+        if (page === "signup") initSignup();
+        if (page === "admin-panel") initAdminPanel();
+        if (page === "Catagori") initCategoryFilter();
+        updateNavbar();
+    });
 }
-// Load correct page on initial load
-window.onload = function () {
-    let page = window.location.hash.substring(1);
-    if (!page) {
-        page = "home";
-    }
-    loadPage(page);
-};
 
-// Optional: Load correct view when hash changes
-window.onhashchange = function () {
-    let page = window.location.hash.substring(1);
-    if (!page) {
-        page = "home";
+function updateNavbar() {
+    const token = localStorage.getItem("user_token");
+    const user = Utils.parseJwt(token)?.user;
+
+    if (user) {
+        $("#login-nav, #signup-nav").hide();
+        $("#logout-nav").removeClass("d-none");
+        if (page === "admin-panel") initAdminPanel();
+
+        if (user.role === "admin") {
+            $("#admin-panel").removeClass("d-none").show();
+        } else {
+            $("#admin-panel").hide();
+        }
+    } else {
+        $("#login-nav, #signup-nav").show();
+        $("#logout-nav").addClass("d-none");
+        $("#admin-panel").hide();
     }
-    loadPage(page);
-};
+}
+
+
+function openCarModal(name, km, fuel, imageUrl) {
+    document.getElementById("carModalTitle").textContent = name;
+    document.getElementById("carName").textContent = name;
+    document.getElementById("carKm").textContent = km;
+    document.getElementById("carFuel").textContent = fuel;
+
+    const carImage = document.getElementById("carImage");
+    carImage.src = imageUrl;
+    carImage.alt = name;
+
+    const modal = new bootstrap.Modal(document.getElementById('carModal'));
+    modal.show();
+}
+
+// Handle Rent button
+document.addEventListener("DOMContentLoaded", () => {
+    const rentBtn = document.getElementById("rentNowBtn");
+    if (rentBtn) {
+        rentBtn.addEventListener("click", () => {
+            const date = document.getElementById("rentalDate").value;
+            const phone = document.getElementById("phoneNumber").value;
+            const review = document.getElementById("review").value;
+
+            if (!date || !phone) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            alert(`✅ Rental confirmed!\nDate: ${date}\nPhone: ${phone}\nReview: ${review}`);
+
+            const modal = bootstrap.Modal.getInstance(document.getElementById('carModal'));
+            modal.hide();
+        });
+    }
+});
+function initCategoryFilter() {
+    $('#car-category').on('change', function () {
+        const selected = $(this).val();
+
+        $('.property-item').each(function () {
+            const category = $(this).data('category');
+            if (selected === 'all' || selected === category) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
+    // Trigger it initially
+    $('#car-category').trigger('change');
+}
+
+let lastScrollTop = 0;
+
+window.addEventListener("scroll", function () {
+    const navbar = document.getElementById("mainNavbar");
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+        // Scroll down → hide navbar
+        navbar.style.top = "-100px";
+    } else {
+        // Scroll up → show navbar
+        navbar.style.top = "0";
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});
+
+

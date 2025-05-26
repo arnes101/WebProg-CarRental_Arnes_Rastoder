@@ -18,12 +18,14 @@ class UserDAO {
     }
 
     public function create($data) {
+        $role = (!isset($data['role']) || empty($data['role'])) ? 'user' : $data['role'];
+    
         $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
         $stmt->execute([
             $data['name'],
             $data['email'],
-            password_hash($data['password'], PASSWORD_DEFAULT),
-            $data['role'] ?? 'user'
+            $data['password'],
+            $role
         ]);
         return $this->pdo->lastInsertId();
     }
