@@ -13,6 +13,8 @@ require_once __DIR__ . '/../services/ReviewService.php';
  * )
  */
 Flight::route('GET /reviews', function () {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $service = new ReviewService();
     Flight::json($service->getAllReviews());
 });
@@ -32,6 +34,8 @@ Flight::route('GET /reviews', function () {
  * )
  */
 Flight::route('GET /reviews/@id', function ($id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $service = new ReviewService();
     Flight::json($service->getReviewById($id));
 });
@@ -58,6 +62,8 @@ Flight::route('GET /reviews/@id', function ($id) {
  * )
  */
 Flight::route('POST /reviews', function () {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $data = Flight::request()->data->getData();
     $data['created_at'] = date('Y-m-d H:i:s');
     $service = new ReviewService();
@@ -86,6 +92,8 @@ Flight::route('POST /reviews', function () {
  * )
  */
 Flight::route('PUT /reviews/@id', function ($id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $data = Flight::request()->data->getData();
     $data['created_at'] = date('Y-m-d H:i:s'); 
     $service = new ReviewService();
@@ -107,6 +115,8 @@ Flight::route('PUT /reviews/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /reviews/@id', function ($id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $service = new ReviewService();
     Flight::json($service->deleteReview($id));
 });

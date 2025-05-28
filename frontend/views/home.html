@@ -332,3 +332,15 @@
 </body>
 
 </html>
+<div class="container mt-3">
+  <h3 id="welcome-message">Welcome!</h3>
+</div>
+<script>
+$(document).ready(function () {
+  const token = localStorage.getItem("user_token");
+  const user = Utils.parseJwt(token)?.user;
+  if (user) {
+    $("#welcome-message").text("Welcome, " + user.name + " (" + user.role + ")");
+  }
+});
+</script>

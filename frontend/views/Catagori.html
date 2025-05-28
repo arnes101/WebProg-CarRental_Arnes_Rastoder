@@ -451,3 +451,36 @@
 </body>
 
 </html>
+<script>
+$(document).ready(function () {
+  RestClient.get("cars", function (cars) {
+    const container = $("#car-list");
+    if (!container.length) return;
+    container.empty();
+    cars.forEach(car => {
+      container.append(`
+        <div class="card p-3 m-2">
+          <h5>${car.name}</h5>
+          <p>Price: ${car.price_per_day} KM/day</p>
+          <button class="btn btn-primary book-btn" data-id="${car.id}">Book</button>
+        </div>
+      `);
+    });
+
+    $(document).on("click", ".book-btn", function () {
+      const carId = $(this).data("id");
+      const user = Utils.parseJwt(localStorage.getItem("user_token"))?.user;
+      const booking = {
+        user_id: user.id,
+        car_id: carId,
+        rental_date: new Date().toISOString().split("T")[0],
+        pickup_location: "Frontend Booking",
+        phone_number: "+38760000000"
+      };
+      RestClient.post("bookings", booking, function () {
+        alert("Booking successful!");
+      });
+    });
+  });
+});
+</script>

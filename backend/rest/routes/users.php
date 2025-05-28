@@ -13,9 +13,21 @@ require_once __DIR__ . '/../services/UserService.php';
  * )
  */
 Flight::route('GET /users', function () {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRole('admin');
+
+    $user = Flight::get('user');
+    file_put_contents('debug.log', "👤 User from token: " . json_encode($user) . "\n", FILE_APPEND);
+
     $service = new UserService();
-    Flight::json($service->getAllUsers());
+    $users = $service->getAllUsers();
+
+    file_put_contents('debug.log', "📋 Users from DB: " . json_encode($users) . "\n", FILE_APPEND);
+
+    header('Content-Type: application/json');
+    echo json_encode($users);
 });
+
 
 /**
  * @OA\Get(
@@ -35,6 +47,9 @@ Flight::route('GET /users', function () {
  * )
  */
 Flight::route('GET /users/@id', function ($id) {
+    
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRole('admin');
     $service = new UserService();
     Flight::json($service->getUserById($id));
 });
@@ -61,6 +76,9 @@ Flight::route('GET /users/@id', function ($id) {
  * )
  */
 Flight::route('POST /users', function () {
+    
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRole('admin');
     $data = Flight::request()->data->getData();
     $service = new UserService();
     Flight::json($service->createUser($data));
@@ -93,6 +111,9 @@ Flight::route('POST /users', function () {
  * )
  */
 Flight::route('PUT /users/@id', function ($id) {
+    
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRole('admin');
     $data = Flight::request()->data->getData();
     $service = new UserService();
     Flight::json($service->updateUser($id, $data));
@@ -116,6 +137,9 @@ Flight::route('PUT /users/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /users/@id', function ($id) {
+    
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRole('admin');
     $service = new UserService();
     Flight::json($service->deleteUser($id));
 });

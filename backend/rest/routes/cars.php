@@ -13,6 +13,8 @@ require_once __DIR__ . '/../services/CarService.php';
  * )
  */
 Flight::route('GET /cars', function () {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $service = new CarService(Flight::get('pdo'));
     Flight::json($service->getAllCars());
 });
@@ -35,6 +37,8 @@ Flight::route('GET /cars', function () {
  * )
  */
 Flight::route('GET /cars/@id', function ($id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $service = new CarService(Flight::get('pdo'));
     Flight::json($service->getCarById($id));
 });
@@ -63,6 +67,8 @@ Flight::route('GET /cars/@id', function ($id) {
  * )
  */
 Flight::route('POST /cars', function () {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRole('admin');
     $data = Flight::request()->data->getData();
     $service = new CarService(Flight::get('pdo'));
     Flight::json($service->createCar($data));
@@ -97,6 +103,9 @@ Flight::route('POST /cars', function () {
  * )
  */
 Flight::route('PUT /cars/@id', function ($id) {
+    
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRole('admin');
     $data = Flight::request()->data->getData();
     $service = new CarService(Flight::get('pdo'));
     Flight::json($service->updateCar($id, $data));
@@ -120,6 +129,8 @@ Flight::route('PUT /cars/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /cars/@id', function ($id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRole('admin');
     $service = new CarService(Flight::get('pdo'));
     Flight::json($service->deleteCar($id));
 });

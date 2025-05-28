@@ -3,7 +3,7 @@
 error_reporting(E_ALL & ~E_DEPRECATED);
 ini_set('display_errors', 1);
 
-require __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../../rest/vendor/autoload.php';
 
 use OpenApi\Generator;
 

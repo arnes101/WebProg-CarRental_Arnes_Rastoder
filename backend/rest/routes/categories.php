@@ -13,6 +13,8 @@ require_once __DIR__ . '/../services/CategoryService.php';
  * )
  */
 Flight::route('GET /categories', function () {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $service = new CategoryService();
     Flight::json($service->getAllCategories());
 });
@@ -32,6 +34,8 @@ Flight::route('GET /categories', function () {
  * )
  */
 Flight::route('GET /categories/@id', function ($id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
     $service = new CategoryService();
     Flight::json($service->getCategoryById($id));
 });
@@ -55,6 +59,8 @@ Flight::route('GET /categories/@id', function ($id) {
  * )
  */
 Flight::route('POST /categories', function () {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRole('admin');
     $data = Flight::request()->data->getData();
     $service = new CategoryService();
     Flight::json($service->createCategory($data));
@@ -81,6 +87,8 @@ Flight::route('POST /categories', function () {
  * )
  */
 Flight::route('PUT /categories/@id', function ($id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRole('admin');
     $data = Flight::request()->data->getData();
     $service = new CategoryService();
     Flight::json($service->updateCategory($id, $data));
@@ -101,6 +109,8 @@ Flight::route('PUT /categories/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /categories/@id', function ($id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRole('admin');
     $service = new CategoryService();
     Flight::json($service->deleteCategory($id));
 });
