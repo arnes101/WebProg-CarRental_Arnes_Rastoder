@@ -1,55 +1,3 @@
-/* #desertImg {
-    width: 1905px;
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    z-index: 900;
-    opacity: 1;
-    height: 500px;
-
-}
-
-.clickable {
-    cursor: pointer;
-}
-
-.modal {
-    z-index: 99999;
-    margin-top: 200px;
-}
-
-.gallery-items {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden
-}
-
-.gallery-items img {
-    flex-shrink: 0;
-    min-width: 100%;
-    min-height: 100%
-}
-
-.single-category {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    height: 200px;
-}
-
-.category-img {
-    flex-shrink: 0;
-    min-width: 100%;
-    min-height: 100%
-}
-
-.col-xl-4 {
-    height: 200px;
-} */
-/* Dark base background and text colors */
-/* ===== Header / Navbar ===== */
 .header-area,
 .header-top,
 .header-bottom {
@@ -343,4 +291,71 @@ body {
     background-color: #444;
     border-color: #666;
     color: white;
+}
+
+/* Enhance navbar links */
+.navbar-nav .nav-link {
+    color: #eee;
+    /* soft white */
+    font-weight: 500;
+    padding: 8px 15px;
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s;
+    border-radius: 4px;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* subtle highlight on hover */
+    color: #fff;
+    border-radius: 4px;
+}
+
+/* Admin Panel dropdown links */
+.dropdown-menu .dropdown-item {
+    color: #eee !important;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+}
+
+/* Active link style (optional) */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+/* Add this to index.css or category.css */
+.btn-dark-theme {
+    background-color: #333 !important;
+    /* dark grey background */
+    color: #eee !important;
+    /* light text */
+    border: 1px solid #555 !important;
+    /* subtle border */
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-dark-theme:hover {
+    background-color: #444 !important;
+    /* slightly lighter on hover */
+    color: #fff !important;
+    border-color: #666 !important;
+}
+
+.modal-dialog {
+    max-width: 800px;
+    /* You can adjust this width */
+}
+
+/* Make the modal body scrollable if content overflows */
+.modal-body {
+    max-height: 70vh;
+    /* Limit height */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
 }

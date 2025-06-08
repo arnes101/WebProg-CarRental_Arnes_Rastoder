@@ -31,6 +31,9 @@
                     <li class="nav-item mx-3">
                         <a class="nav-link text-white" href="#" onclick="loadPage('Catagori')">Category</a>
                     </li>
+                    <li class="nav-item mx-3">
+                        <a class="nav-link text-white" href="#" onclick="loadPage('chat')">Chat</a>
+                    </li>
                 </ul>
             </div>
 
@@ -64,40 +67,7 @@
     <!-- SPA Content -->
     <main class="flex-grow-1" id="content"></main>
 
-    <!-- Car Modal -->
-    <div class="modal fade" id="carModal" tabindex="-1" aria-labelledby="carModalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content bg-dark text-white">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="carModalTitle">Car Details</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-white">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <img id="carImage" src="" class="img-fluid rounded" alt="Car Image">
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Car:</strong> <span id="carName"></span></p>
-                            <p><strong>Kilometers:</strong> <span id="carKm"></span></p>
-                            <p><strong>Fuel Consumption:</strong> <span id="carFuel"></span></p>
-                            <label for="rentalDate" class="form-label">Pick a rental date:</label>
-                            <input type="date" id="rentalDate" class="form-control mb-2" />
-                            <label for="phoneNumber" class="form-label">Phone Number:</label>
-                            <input type="tel" id="phoneNumber" class="form-control mb-2" placeholder="+1 234 567 890" />
-                            <label for="review" class="form-label">Leave a review:</label>
-                            <textarea id="review" class="form-control mb-3" rows="3"></textarea>
-                            <div class="d-flex justify-content-end gap-2">
-                                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" id="rentNowBtn">Rent Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Footer -->
     <footer class="bg-dark text-light mt-auto py-4">
@@ -116,7 +86,13 @@
     <script src="js/utils.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/admin-panel.js"></script>
+    <script src="js/chat.js"></script>
     <script src="js/spa.js"></script>
+    <!-- jQuery Validation plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <!-- BlockUI plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+
 </body>
 
 </html>

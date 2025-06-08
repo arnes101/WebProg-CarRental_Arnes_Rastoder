@@ -31,13 +31,20 @@ class UserDAO {
     }
 
     public function update($id, $data) {
+        // Fetch existing user data
+        $existingUser = $this->get($id);
+        if (!$existingUser) {
+            throw new Exception("User not found.");
+        }
+    
+        // Merge existing data with new data
+        $name = isset($data['name']) ? $data['name'] : $existingUser['name'];
+        $email = isset($data['email']) ? $data['email'] : $existingUser['email'];
+        $role = isset($data['role']) ? $data['role'] : $existingUser['role'];
+    
+        // Update query
         $stmt = $this->pdo->prepare("UPDATE users SET name = ?, email = ?, role = ? WHERE id = ?");
-        $stmt->execute([
-            $data['name'],
-            $data['email'],
-            $data['role'],
-            $id
-        ]);
+        $stmt->execute([$name, $email, $role, $id]);
         return $stmt->rowCount();
     }
 

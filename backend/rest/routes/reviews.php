@@ -21,6 +21,30 @@ Flight::route('GET /reviews', function () {
 
 /**
  * @OA\Get(
+ *     path="/reviews/car/{car_id}",
+ *     tags={"Reviews"},
+ *     summary="Get reviews by car ID",
+ *     @OA\Parameter(
+ *         name="car_id", in="path", required=true, @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Get reviews for a car"
+ *     )
+ * )
+ */
+Flight::route('GET /reviews/car/@car_id', function ($car_id) {
+    Flight::get('auth_middleware')->verifyToken();
+    Flight::get('auth_middleware')->authorizeRoles(['admin', 'client']);
+    $service = new ReviewService();
+    $allReviews = $service->getAllReviews();
+    $carReviews = array_filter($allReviews, function ($r) use ($car_id) {
+        return $r['car_id'] == $car_id;
+    });
+    Flight::json(array_values($carReviews));
+});
+/**
+ * @OA\Get(
  *     path="/reviews/{id}",
  *     tags={"Reviews"},
  *     summary="Get a review by ID",
