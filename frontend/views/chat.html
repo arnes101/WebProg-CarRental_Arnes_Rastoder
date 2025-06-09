@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Real-Time Chat</title>
+
+</head>
+
+<body>
+    <div class="container py-4">
+        <h2 class="text-center text-white mb-4">Chat Room</h2>
+        <p class="text-center text-muted">Active users: <span id="active-users" class="fw-bold">0</span></p>
+        <div id="chat" class="bg-dark text-white p-3 mb-3 rounded" style="height: 300px; overflow-y: scroll;"></div>
+        <div class="mb-3">
+            <input type="text" id="nickname" class="form-control mb-2" placeholder="Enter nickname...">
+            <input type="text" id="message" class="form-control mb-2" placeholder="Type your message...">
+            <button id="send-button" class="btn btn-primary w-100">Send</button>
+        </div>
+    </div>
+
+
+</html>

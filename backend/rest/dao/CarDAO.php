@@ -18,11 +18,42 @@ class CarDAO {
 }
 
 
-    public function create($data) {
-        $stmt = $this->pdo->prepare("INSERT INTO cars (name, price_per_day, kilometers, fuel_consumption, category_id, image_url) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$data['name'], $data['price_per_day'], $data['kilometers'], $data['fuel_consumption'], $data['category_id'], $data['image_url']]);
-        return $this->pdo->lastInsertId();
+public function create($data) {
+    if (empty($data['name']) || strlen(trim($data['name'])) < 3) {
+        throw new Exception("Car name must be at least 3 characters long.");
     }
+    if (empty($data['price_per_day']) || !is_numeric($data['price_per_day'])) {
+        throw new Exception("Invalid price per day");
+    }
+    if (empty($data['kilometers']) || !is_numeric($data['kilometers'])) {
+        throw new Exception("Invalid kilometers");
+    }
+    if (empty($data['fuel_consumption']) || !is_numeric($data['fuel_consumption'])) {
+        throw new Exception("Invalid fuel consumption");
+    }
+    if (empty($data['category_id']) || !is_numeric($data['category_id'])) {
+        throw new Exception("Invalid category ID");
+    }
+    if (empty($data['image_url']) || strlen(trim($data['image_url'])) < 5) {
+        throw new Exception("Invalid image URL");
+    }
+
+    $name = htmlspecialchars(trim($data['name']));
+    $image_url = htmlspecialchars(trim($data['image_url']));
+
+    $stmt = $this->pdo->prepare("INSERT INTO cars (name, price_per_day, kilometers, fuel_consumption, category_id, image_url) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([
+        $name,
+        $data['price_per_day'],
+        $data['kilometers'],
+        $data['fuel_consumption'],
+        $data['category_id'],
+        $image_url
+    ]);
+
+    return $this->pdo->lastInsertId();
+}
+
 
     public function update($id, $data) {
         $stmt = $this->pdo->prepare("UPDATE cars SET name = ?, price_per_day = ?, kilometers = ?, fuel_consumption = ?, category_id = ?, image_url = ? WHERE id = ?");

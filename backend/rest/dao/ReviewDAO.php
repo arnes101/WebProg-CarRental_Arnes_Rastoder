@@ -18,15 +18,30 @@ class ReviewDAO {
     }
 
     public function create($review) {
+        if (empty($review['user_id']) || !is_numeric($review['user_id'])) {
+            throw new Exception("Invalid user ID");
+        }
+        if (empty($review['car_id']) || !is_numeric($review['car_id'])) {
+            throw new Exception("Invalid car ID");
+        }
+        if (empty($review['content']) || strlen(trim($review['content'])) < 5) {
+            throw new Exception("Review content must be at least 5 characters");
+        }
+    
+        $content = htmlspecialchars(trim($review['content']));
+        $created_at = $review['created_at'] ?? date('Y-m-d H:i:s');
+    
         $stmt = $this->pdo->prepare("INSERT INTO reviews (user_id, car_id, content, created_at) VALUES (?, ?, ?, ?)");
         $stmt->execute([
-            $review['user_id'], 
-            $review['car_id'], 
-            $review['content'],
-            $review['created_at'] ?? date('Y-m-d H:i:s') 
+            $review['user_id'],
+            $review['car_id'],
+            $content,
+            $created_at
         ]);
+    
         return $this->pdo->lastInsertId();
     }
+        
 
     public function update($id, $review) {
         $stmt = $this->pdo->prepare("UPDATE reviews SET content = ?, created_at = ? WHERE id = ?");

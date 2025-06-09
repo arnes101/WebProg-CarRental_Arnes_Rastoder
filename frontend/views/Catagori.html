@@ -154,7 +154,7 @@
             <div class="row" id="car-cards">
                 <div class="col-md-4 property-item" data-category="suv">
                     <div class="card"
-                        onclick="openCarModal('Jeep', '$50/day','10L/100km', 'assets/img/categori/pexels-aaronmcurtis-119435.jpg')">
+                        onclick="openCarModal(5,'Jeep', '$50/day','10L/100km', 'assets/img/categori/pexels-aaronmcurtis-119435.jpg')">
                         <img src="assets/img/categori/pexels-aaronmcurtis-119435.jpg" class="card-img-top"
                             alt="SUV Car">
                         <div class="card-body">
@@ -165,7 +165,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="suv">
                     <div class="card"
-                        onclick="openCarModal('Mercedes G-class', '$40/day','12L/100km', 'assets/img/categori/pexels-lloyd-freeman-599375-1429775.jpg')">
+                        onclick="openCarModal(6,'Mercedes G-class', '$40/day','12L/100km', 'assets/img/categori/pexels-lloyd-freeman-599375-1429775.jpg')">
                         <img src="assets/img/categori/pexels-lloyd-freeman-599375-1429775.jpg" class="card-img-top"
                             alt="SUV Car">
                         <div class="card-body">
@@ -176,7 +176,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="coupe">
                     <div class="card"
-                        onclick="openCarModal('Mercedes AMG slg', '$30/day','14L/100km', 'assets/img/categori/pexels-mikebirdy-112460.jpg')">
+                        onclick="openCarModal(7,'Mercedes AMG slg', '$30/day','14L/100km', 'assets/img/categori/pexels-mikebirdy-112460.jpg')">
                         <img src="assets/img/categori/pexels-mikebirdy-112460.jpg" class="card-img-top" alt="Coupe Car">
                         <div class="card-body">
                             <h5 class="card-title">Mercedes AMG slg</h5>
@@ -186,7 +186,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="sedan">
                     <div class="card"
-                        onclick="openCarModal('BMW M3', '$60/day','9L/100km', 'assets/img/categori/pexels-mikebirdy-170811.jpg')">
+                        onclick="openCarModal(9,'BMW M3', '$60/day','9L/100km', 'assets/img/categori/pexels-mikebirdy-170811.jpg')">
                         <img src="assets/img/categori/pexels-mikebirdy-170811.jpg" class="card-img-top" alt="Sedan Car">
                         <div class="card-body">
                             <h5 class="card-title">BMW M3</h5>
@@ -196,7 +196,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="coupe">
                     <div class="card"
-                        onclick="openCarModal('Mercedes A-clas Coupe', '$60/day','7L/100km', 'assets/img/categori/pexels-mikebirdy-810357.jpg')">
+                        onclick="openCarModal(8,'Mercedes A-clas Coupe', '$60/day','7L/100km', 'assets/img/categori/pexels-mikebirdy-810357.jpg')">
                         <img src="assets/img/categori/pexels-mikebirdy-810357.jpg" class="card-img-top" alt="Coupe Car">
                         <div class="card-body">
                             <h5 class="card-title">Mercedes A-clas Coupe</h5>
@@ -206,7 +206,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="suv">
                     <div class="card"
-                        onclick="openCarModal('Jeep', '$60/day','11L/100km', 'assets/img/categori/pexels-zsolt-joo-483255-2882234.jpg')">
+                        onclick="openCarModal(14,'Jeep', '$60/day','11L/100km', 'assets/img/categori/pexels-zsolt-joo-483255-2882234.jpg')">
                         <img src="assets/img/categori/pexels-zsolt-joo-483255-2882234.jpg" class="card-img-top"
                             alt="SUV Car">
                         <div class="card-body">
@@ -217,7 +217,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="coupe">
                     <div class="card"
-                        onclick="openCarModal('Blue Alpine Coupe', '$60/day','9L/100km', 'assets/img/categori/pexels-alexgtacar-745150-1592384.jpg')">
+                        onclick="openCarModal(10,'Blue Alpine Coupe', '$60/day','9L/100km', 'assets/img/categori/pexels-alexgtacar-745150-1592384.jpg')">
                         <img src="assets/img/categori/pexels-alexgtacar-745150-1592384.jpg" class="card-img-top"
                             alt="Coupe Car">
                         <div class="card-body">
@@ -228,7 +228,7 @@
                 </div>
                 <div class="col-md-4 property-item" data-category="sedan">
                     <div class="card"
-                        onclick="openCarModal('Audi a7', '$60/day', '8L/100km','assets/img/categori/pexels-mladenscekic-17217573.jpg')">
+                        onclick="openCarModal(11,'Audi a7', '$60/day', '8L/100km','assets/img/categori/pexels-mladenscekic-17217573.jpg')">
                         <img src="assets/img/categori/pexels-mladenscekic-17217573.jpg" class="card-img-top"
                             alt="Sedan Car">
                         <div class="card-body">
@@ -302,7 +302,7 @@
                     <!-- Footer -->
                     <div class="modal-footer border-top-0">
                         <button type="button" class="btn btn-dark text-white" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-dark text-white">Rent Now</button>
+                        <button type="button" id="rentNowBtn" class="btn btn-dark text-white">Rent Now</button>
                     </div>
                 </div>
             </div>
@@ -442,45 +442,10 @@
     </footer> -->
 
 
-    <!-- JS here -->
 
-    <!-- filter-->
 
 
 
 </body>
 
 </html>
-<script>
-$(document).ready(function () {
-  RestClient.get("cars", function (cars) {
-    const container = $("#car-list");
-    if (!container.length) return;
-    container.empty();
-    cars.forEach(car => {
-      container.append(`
-        <div class="card p-3 m-2">
-          <h5>${car.name}</h5>
-          <p>Price: ${car.price_per_day} KM/day</p>
-          <button class="btn btn-primary book-btn" data-id="${car.id}">Book</button>
-        </div>
-      `);
-    });
-
-    $(document).on("click", ".book-btn", function () {
-      const carId = $(this).data("id");
-      const user = Utils.parseJwt(localStorage.getItem("user_token"))?.user;
-      const booking = {
-        user_id: user.id,
-        car_id: carId,
-        rental_date: new Date().toISOString().split("T")[0],
-        pickup_location: "Frontend Booking",
-        phone_number: "+38760000000"
-      };
-      RestClient.post("bookings", booking, function () {
-        alert("Booking successful!");
-      });
-    });
-  });
-});
-</script>

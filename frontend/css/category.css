@@ -256,3 +256,35 @@ textarea {
     border-color: #666;
     color: white;
 }
+
+/* Add this to index.css or category.css */
+.btn-dark-theme {
+    background-color: #333 !important;
+    /* dark grey background */
+    color: #eee !important;
+    /* light text */
+    border: 1px solid #555 !important;
+    /* subtle border */
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-dark-theme:hover {
+    background-color: #444 !important;
+    /* slightly lighter on hover */
+    color: #fff !important;
+    border-color: #666 !important;
+}
+
+.modal-dialog {
+    max-width: 800px;
+    /* You can adjust this width */
+}
+
+/* Make the modal body scrollable if content overflows */
+.modal-body {
+    max-height: 70vh;
+    /* Limit height */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+}
